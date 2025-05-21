@@ -1,0 +1,23 @@
+include:
+  - local: 'shared-ci/docker-build-template.yml'
+
+stages:
+  - build
+
+build-frontend:
+  extends: .docker-build-template
+  stage: build
+  variables:
+    CONTEXT_PATH: ./frontend
+  rules:
+    - changes:
+        - frontend/**
+
+build-backend:
+  extends: .docker-build-template
+  stage: build
+  variables:
+    CONTEXT_PATH: ./backend
+  rules:
+    - changes:
+        - backend/**
